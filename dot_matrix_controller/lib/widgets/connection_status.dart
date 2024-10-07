@@ -14,7 +14,7 @@ class ConnectionStatus extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
-            'Status: ${bluetoothService.connectionStatus}',
+            '상태: ${bluetoothService.connectionStatus}',
             style: TextStyle(color: Colors.white),
           ),
         );

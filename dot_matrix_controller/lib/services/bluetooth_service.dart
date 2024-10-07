@@ -7,7 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 class BluetoothService extends ChangeNotifier {
   BluetoothConnection? _connection;
   bool _isConnected = false;
-  String _connectionStatus = 'Disconnected';
+  String _connectionStatus = '연결되지 않음';
 
   bool get isConnected => _isConnected;
   String get connectionStatus => _connectionStatus;
@@ -40,19 +40,19 @@ class BluetoothService extends ChangeNotifier {
     if (selectedDevice == null) return;
 
     await BluetoothConnection.toAddress(selectedDevice.address).then((_connection) {
-      print('Connected to the device');
+      print('장치 연결');
       this._connection = _connection;
       _isConnected = true;
-      _connectionStatus = 'Connected';
+      _connectionStatus = '연결됨';
       notifyListeners();
 
       _connection.input!.listen(_onDataReceived).onDone(() {
         disconnect();
       });
     }).catchError((error) {
-      print('Cannot connect, exception occurred');
+      print('연결할 수 없습니다. 예외가 발생했습니다.');
       print(error);
-      _showErrorDialog(context, 'Failed to connect to the device.');
+      _showErrorDialog(context, '장치에 연결하지 못했습니다.');
     });
   }
 
@@ -60,7 +60,7 @@ class BluetoothService extends ChangeNotifier {
     _connection?.dispose();
     _connection = null;
     _isConnected = false;
-    _connectionStatus = 'Disconnected';
+    _connectionStatus = '연결 끊김';
     notifyListeners();
   }
 
@@ -71,7 +71,7 @@ class BluetoothService extends ChangeNotifier {
         print('Command sent: $command');
       });
     } else {
-      print('Not connected to any device');
+      print('기기와 연결되어있지 않습니다.');
     }
   }
 
@@ -85,13 +85,13 @@ class BluetoothService extends ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: const Text('Select a device'),
+          title: const Text('장치 선택'),
           children: devices.map((device) {
             return SimpleDialogOption(
               onPressed: () {
                 Navigator.pop(context, device);
               },
-              child: Text(device.name ?? "Unknown device"),
+              child: Text(device.name ?? "알 수 없는 장치"),
             );
           }).toList(),
         );
@@ -103,8 +103,8 @@ class BluetoothService extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Permissions Required'),
-        content: Text('Bluetooth and location permissions are required for this app to function.'),
+        title: Text('권한 설정'),
+        content: Text('이 앱이 작동하려면 블루투스 및 위치 권한이 필요합니다.'),
         actions: [
           TextButton(
             child: Text('OK'),
@@ -119,8 +119,8 @@ class BluetoothService extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('No Devices Found'),
-        content: Text('No paired Bluetooth devices were found. Please pair a device and try again.'),
+        title: Text('장치를 찾을 수 없습니다.'),
+        content: Text('페어링된 Bluetooth 장치를 찾을 수 없습니다. 장치를 페어링하고 다시 시도하십시오.'),
         actions: [
           TextButton(
             child: Text('OK'),
