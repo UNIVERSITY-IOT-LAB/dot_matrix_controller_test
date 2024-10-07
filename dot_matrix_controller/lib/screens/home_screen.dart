@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
               ConnectionStatus(),
               SizedBox(height: 20),
               ElevatedButton(
-                child: Text(bluetoothService.isConnected ? 'Disconnect' : 'Connect'),
+                child: Text(bluetoothService.isConnected ? '연결 해제' : '연결 하기'),
                 onPressed: () => bluetoothService.isConnected
                     ? bluetoothService.disconnect()
                     : bluetoothService.connectToDevice(context),
