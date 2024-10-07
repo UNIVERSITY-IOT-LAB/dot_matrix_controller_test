@@ -1,0 +1,1 @@
+ /Users/02.011x/dot_matrix_controller_test/dot_matrix_controller/.dart_tool/flutter_build/905608740f91f8ebc8f41278b4aacab3/native_assets.yaml: 
