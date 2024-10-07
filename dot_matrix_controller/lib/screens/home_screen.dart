@@ -47,19 +47,19 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   ShapeButton(
                     icon: 'assets/icons/circle.svg',
-                    label: 'Circle',
+                    label: '동그라미',
                     onPressed: () => bluetoothService.sendCommand('C'),
                     isEnabled: bluetoothService.isConnected,
                   ),
                   ShapeButton(
                     icon: 'assets/icons/triangle.svg',
-                    label: 'Triangle',
+                    label: '세모',
                     onPressed: () => bluetoothService.sendCommand('T'),
                     isEnabled: bluetoothService.isConnected,
                   ),
                   ShapeButton(
                     icon: 'assets/icons/square.svg',
-                    label: 'Square',
+                    label: '네모',
                     onPressed: () => bluetoothService.sendCommand('S'),
                     isEnabled: bluetoothService.isConnected,
                   ),
