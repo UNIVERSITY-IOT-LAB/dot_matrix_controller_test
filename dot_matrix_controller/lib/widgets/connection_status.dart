@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:dot_matrix_controller/services/bluetooth_service.dart';
 
 class ConnectionStatus extends StatelessWidget {
+  final String status;
+
+  const ConnectionStatus({Key? key, required this.status}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<BluetoothService>(
-      builder: (context, bluetoothService, child) {
-        return Container(
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: bluetoothService.isConnected ? Colors.green : Colors.red,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(
-            '상태: ${bluetoothService.connectionStatus}',
-            style: TextStyle(color: Colors.white),
-          ),
-        );
-      },
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: status == 'Connected' ? Colors.green : Colors.red,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Text(
+        'Status: $status',
+        style: const TextStyle(color: Colors.white),
+      ),
     );
   }
 }
